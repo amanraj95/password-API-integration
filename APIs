@@ -1,0 +1,62 @@
+**Install SAWO SDK**
+
+```shell
+  npm install sawo
+  ```
+
+- **Import SAWO SDK**:
+
+ ```js
+  import Sawo from 'sawo'
+  ```
+
+- **Import Classes**: to create a login page 
+
+ ```js
+  import React, { useEffect } from 'react'
+  import Sawo from 'sawo'
+  import { navigate } from 'gatsby'
+  ```
+
+- **Styling the JavaScript**:
+
+```cpp
+ // Styles
+ const pageStyles = {
+   color: '#bf7ed6',
+   padding: 80,
+   fontFamily: 'Roboto, sans-serif, serif',
+ }
+ const headingStyles = {
+   marginTop: 10,
+   marginBottom: 45,
+   maxWidth: 400,
+ }
+ // markup
+ const IndexPage = () => {
+   useEffect(() => {
+     var config = {
+       // should be same as the id of the container created on 3rd step
+       containerID: 'CONTAINER_ID_HERE',
+       // can be one of 'email' or 'phone_number_sms'
+       identifierType: 'email',
+       // Add the API key copied from 5th step
+       apiKey: 'API_KEY_HERE',
+       // Add a callback here to handle the payload sent by sdk
+       onSuccess: (payload) => {
+       // you can use this payload for your purpose
+         navigate('/TO_PAGE_HERE')
+       },
+     }
+     let sawo = new Sawo(config)
+     sawo.showForm()
+   }, [])
+   return (
+     <main style={pageStyles}>
+       <title> Login Page </title>
+        <h1 style={headingStyles}>Login Page</h1>
+        <div id="sawo-container" style={{ height: '300px', width: '400px' }}> </div>
+     </main>
+   )
+ }
+ export default IndexPage
